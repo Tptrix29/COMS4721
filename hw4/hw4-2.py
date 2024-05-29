@@ -46,9 +46,8 @@ def posterior_inference(X, X_train, Y_train, kernel):
     _X = np.hstack([X, X_train])
     sigma = kernel_matrix(_X.reshape((m+n, -1)), kernel)
     sigma11, sigma12, sigma21, sigma22 = sigma[:n, :n], sigma[:n, n:], sigma[n:, :n], sigma[n:, n:]
-    mu1 = np.zeros(n)
-    posterior_mu = mu1
     inv_sigma22 = np.linalg.pinv(sigma22) if np.linalg.det(sigma22) == 0 else np.linalg.inv(sigma22)
+    posterior_mu = sigma12 @ inv_sigma22 @ Y_train
     posterior_sigma = sigma11 - sigma12 @ inv_sigma22 @ sigma21
     return posterior_mu, posterior_sigma
 
@@ -116,7 +115,7 @@ def visualization(x, Y, title):
     for i in range(n):
         plt.plot(x, Y[i, :], '-', markersize=0.5, color=colors[i])
         plt.xlim([-10, 10])
-        plt.ylim([-3, 3])
+        plt.ylim([-4, 4])
     return plt
 
 

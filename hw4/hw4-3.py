@@ -6,6 +6,17 @@ import matplotlib.pyplot as plt
 mpl.rcParams['font.family'] = 'Helvetica'
 
 
+# TODO: customize the parameters
+################################################
+iteration = 50
+k = 10
+run_dist = False  # set to False if the path distance matrix is already calculated
+data_name = "swiss_roll"  # "swiss_roll", "swiss_roll_hole"
+data_path = "../data/hw4/"  # data file path
+array_path = "./array-data/"  # array file path
+output_path = "./output/"  # output file path
+################################################
+
 def read_data(file_path):
     """
     Load the data from the file
@@ -136,17 +147,6 @@ class EmbeddingOptimizer:
 
 
 if __name__ == '__main__':
-    # TODO: customize the parameters
-    ################################################
-    iteration = 50
-    k = 10
-    run_dist = False  # set to False if the path distance matrix is already calculated
-    data_name = "swiss_roll"  # "swiss_roll", "swiss_roll_hole"
-    data_path = "../data/hw4/"  # data file path
-    array_path = "./array-data/"  # array file path
-    output_path = "./output/"  # output file path
-    ################################################
-
     file = f"{data_path}{data_name}.txt"  # data file path
     knn_filename = f"{array_path}{data_name}_knn_{k}.npy"
     output_filename = f"{array_path}{data_name}_embedding.npy"
